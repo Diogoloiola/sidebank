@@ -69,3 +69,4 @@ gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth' # gem para 
 gem 'pagy', '~> 6.0', '>= 6.0.3'
 gem 'pundit', '~> 2.3' # gem para autorização dos dados
 gem 'rswag', '~> 2.8' # documentação da api
+gem 'u-case', '~> 4.5', '>= 4.5.2'
