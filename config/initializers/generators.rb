@@ -11,4 +11,5 @@ Rails.application.config.generators do |g| # rubocop:disable Style/FrozenStringL
   g.observer_specs false
   g.routing_specs false
   g.view_specs false
+  g.orm :active_record, primary_key_type: :uuid
 end
