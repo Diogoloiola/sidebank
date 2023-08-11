@@ -1,6 +1,6 @@
 class DeviseTokenAuthCreateCustomers < ActiveRecord::Migration[7.0]
   def change # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-    create_table(:customers) do |t|
+    create_table(:customer_customers) do |t|
       ## Required
       t.string :provider, null: false, default: 'email'
       t.string :uid, null: false, default: ''
@@ -28,6 +28,7 @@ class DeviseTokenAuthCreateCustomers < ActiveRecord::Migration[7.0]
       t.string :cpf
       t.string :cellphone
       t.date :birthdate
+      t.boolean :active, default: false
 
       ## Tokens
       t.json :tokens
@@ -35,10 +36,10 @@ class DeviseTokenAuthCreateCustomers < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :customers, :email, unique: true
-    add_index :customers, %i[uid provider], unique: true
-    add_index :customers, :reset_password_token, unique: true
-    add_index :customers, :confirmation_token,   unique: true
+    add_index :customer_customers, :email, unique: true
+    add_index :customer_customers, %i[uid provider], unique: true
+    add_index :customer_customers, :reset_password_token, unique: true
+    add_index :customer_customers, :confirmation_token,   unique: true
     # add_index :customers, :unlock_token,         unique: true
   end
 end
