@@ -1,0 +1,76 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/web/v1/customers":
+    post:
+      summary: cria um novo customer
+      tags:
+      - Customer
+      parameters: []
+      responses:
+        '201':
+          description: Customer criado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer:
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                        format: email
+                      cpf:
+                        type: string
+                      birthdate:
+                        type: string
+                        format: date
+                      cellphone:
+                        type: string
+        '422':
+          description: requsição inválida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer:
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                      format: email
+                    cpf:
+                      type: string
+                    birthdate:
+                      type: string
+                      format: date
+                    cellphone:
+                      type: string
+              required:
+              - name
+              - email
+              - cpf
+              - cellphone
+              - birthdate
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
