@@ -3,11 +3,11 @@ module Customer
     class Persist < Micro::Case::Strict
       attributes :name, :email, :cpf, :birthdate, :cellphone
 
-      def call! # rubocop:disable Metrics/MethodLength
+      def call! # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         customer = Customer::Record.new(
           name:,
           email:,
-          cpf:,
+          cpf: CPF.new(cpf).formatted,
           birthdate:,
           cellphone:,
           skip_password_validation: true
