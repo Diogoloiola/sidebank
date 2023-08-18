@@ -3,7 +3,7 @@ module Customer
     class Persist < Micro::Case::Strict
       attributes :name, :email, :cpf, :birthdate, :cellphone
 
-      def call! # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def call! # rubocop:disable Metrics/MethodLength
         customer = Customer::Record.new(
           name:,
           email:,
@@ -17,12 +17,12 @@ module Customer
           Success result: { customer: }
         else
           Failure :error, result: {
-            errors: OpenStruct.new(full_messages: customer.errors.messages)
+            errors: customer.errors.messages
           }
         end
       rescue StandardError => e
         Failure :error, result: {
-          errors: OpenStruct.new(full_messages: e.message)
+          errors: [e.message]
         }
       end
     end
