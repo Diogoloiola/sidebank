@@ -28,5 +28,6 @@ module SideBank
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+    config.i18n.default_locale = :'pt-BR'
   end
 end
