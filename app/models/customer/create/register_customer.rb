@@ -1,6 +1,6 @@
 module Customer
   module Create
-    class RegisterCustomer < Micro::Case
+    class RegisterCustomer < Micro::Case::Strict
       attributes :name, :email, :cpf, :birthdate, :cellphone
 
       def call! # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
