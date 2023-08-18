@@ -27,7 +27,7 @@ RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable
         it 'expor a mensagem de erro' do
           attributes[:name] = ''
           result = described_class.call(attributes).data
-          expect(result[:errors].full_messages.find { |d| d[:attribute] == 'name' }.present?).to be true
+          expect(result[:errors]).to include('O nome não pode ser vazio')
         end
       end
 
@@ -45,7 +45,7 @@ RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable
         it 'expor a mensagem de erro' do
           attributes[:cellphone] = ''
           result = described_class.call(attributes).data
-          expect(result[:errors].full_messages.find { |d| d[:attribute] == 'cellphone' }.present?).to be true
+          expect(result[:errors]).to include('O celular não pode ser vazio')
         end
       end
 
@@ -63,7 +63,7 @@ RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable
         it 'expor a mensagem de erro' do
           attributes[:birthdate] = ''
           result = described_class.call(attributes).data
-          expect(result[:errors].full_messages.find { |d| d[:attribute] == 'birthdate' }.present?).to be true
+          expect(result[:errors]).to include('A data de nascimento deve estar presente e o usuário deve ter mais de 18 anos') # rubocop:disable Layout/LineLength
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable
         it 'expor a mensagem de erro' do
           attributes[:email] = ''
           result = described_class.call(attributes).data
-          expect(result[:errors].full_messages.find { |d| d[:attribute] == 'email' }.present?).to be true
+          expect(result[:errors]).to include('Email é inválido')
         end
       end
 
@@ -99,7 +99,7 @@ RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable
         it 'expor a mensagem de erro' do
           attributes[:cpf] = ''
           result = described_class.call(attributes).data
-          expect(result[:errors].full_messages.find { |d| d[:attribute] == 'cpf' }.present?).to be true
+          expect(result[:errors]).to include('CPF não é válido')
         end
       end
 
