@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Customer::Create::RegisterCustomer, type: :user_case do # rubocop:disable Metrics/BlockLength
+RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable Metrics/BlockLength
   let(:attributes) do
     {
       name: Faker::Name.name,
@@ -100,6 +100,32 @@ RSpec.describe Customer::Create::RegisterCustomer, type: :user_case do # rubocop
           attributes[:cpf] = ''
           result = described_class.call(attributes).data
           expect(result[:errors].full_messages.find { |d| d[:attribute] == 'cpf' }.present?).to be true
+        end
+      end
+
+      context 'Quando tenta cadastrar um cpf duplicado' do
+        it 'retorna uma falha' do
+          described_class.call(attributes)
+
+          attributes[:email] = Faker::Internet.email
+          result = described_class.call(attributes)
+
+          expect(result).to be_a_failure
+          expect(result.type).to be(:error)
+          expect(result.data.keys).to contain_exactly(:errors)
+        end
+      end
+
+      context 'Quando tenta cadastrar um email duplicado' do
+        it 'retorna uma falha' do
+          described_class.call(attributes)
+
+          attributes[:cpf] = CPF.generate
+          result = described_class.call(attributes)
+
+          expect(result).to be_a_failure
+          expect(result.type).to be(:error)
+          expect(result.data.keys).to contain_exactly(:errors)
         end
       end
     end
