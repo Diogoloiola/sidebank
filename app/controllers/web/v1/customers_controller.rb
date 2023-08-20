@@ -2,7 +2,7 @@ module Web
   module V1
     class CustomersController < ApplicationController
       def create
-        result = Customer::Create::Register.call(customer_params.to_hash)
+        result = Customer::Register::Flow.call(customer_params.to_hash)
 
         if result.success?
           @customer = result.data[:customer]
