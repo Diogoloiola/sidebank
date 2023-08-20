@@ -5,12 +5,15 @@ module Customer
 
       def call! # rubocop:disable Metrics/MethodLength
         customer = Customer::Record.new(
+          provider: 'cpf',
+          uid: cpf,
           name:,
           email:,
-          cpf: CPF.new(cpf).formatted,
+          cpf:,
           birthdate:,
           cellphone:,
-          skip_password_validation: true
+          skip_password_validation: true,
+          active: true
         )
 
         if customer.save!

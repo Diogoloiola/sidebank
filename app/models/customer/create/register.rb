@@ -5,6 +5,7 @@ module Customer
 
       def call!
         call(ValidateParams)
+          .then(SanatizeParams)
           .then(Persist)
           .then(SendEmail)
       end
