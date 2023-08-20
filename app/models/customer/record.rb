@@ -11,6 +11,8 @@ module Customer
            authentication_keys: %i[cpf email]
     include DeviseTokenAuth::Concerns::User
 
+    has_many :accounts, -> { where(active: true) }, class_name: 'Account::Record', foreign_key: :customer_id
+
     def active_for_authentication?
       super && active?
     end
