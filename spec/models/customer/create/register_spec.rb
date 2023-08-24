@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Customer::Create::Register, type: :user_case do # rubocop:disable Metrics/BlockLength
+RSpec.describe Customer::Register::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
   let(:attributes) do
     {
       name: Faker::Name.name,
