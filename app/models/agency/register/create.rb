@@ -9,18 +9,16 @@ module Agency
 
         errors = validate_params(name, code)
 
-        if errors.any?
-          Failure(:invalid_attributes, result: { errors: })
-        else
-          agency = Agency::Record.new(name:, code:)
+        return Failure(:invalid_attributes, result: { errors: }) if errors.any?
 
-          if agency.save!
-            Success result: { agency: }
-          else
-            Failure :error, result: {
-              errors: customer.errors.messages.joins(', ')
-            }
-          end
+        agency = Agency::Record.new(name:, code:)
+
+        if agency.save!
+          Success result: { agency: }
+        else
+          Failure :error, result: {
+            errors: agency.errors.full_messages.join(', ')
+          }
         end
       end
 
