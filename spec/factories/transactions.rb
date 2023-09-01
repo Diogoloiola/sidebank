@@ -4,8 +4,8 @@ FactoryBot.define do
     transaction_type { 1 }
     value { "9.99" }
     date_transaction { "2023-08-31" }
-    origin { nil }
-    destiny { nil }
+    origin_id { nil }
+    destiny_id { nil }
     description { "MyText" }
   end
 end
