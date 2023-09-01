@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :transation, class: 'Transaction::Record' do
+  factory :transaction, class: 'Transaction::Record' do
     # TODO trocar valores para faker
     transaction_type { 1 }
     value { "9.99" }

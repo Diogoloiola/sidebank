@@ -1,5 +1,5 @@
 module Transaction
-  class Transation < ApplicationRecord
+  class Record < ApplicationRecord
     self.table_name = 'transaction_transactions'
 
     belongs_to :origin, class_name: 'Customer::Record', optional: false

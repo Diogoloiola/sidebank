@@ -1,6 +1,6 @@
-class CreateTransations < ActiveRecord::Migration[7.0]
+class CreateTransactions < ActiveRecord::Migration[7.0]
   def change
-    create_table :transations, id: :uuid do |t|
+    create_table :transactions, id: :uuid do |t|
       t.integer :transaction_type
       t.decimal :value
       t.date :date_transaction
