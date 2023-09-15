@@ -17,7 +17,10 @@ module Transation
         def validate_params
           errors = []
 
-          errors << ['O valor não poder ser negativo'] if value.negative?
+          account = Account::Record.find(origin_id)
+
+          errors << 'O valor não poder ser negativo' if value.negative?
+          errors << 'A conta não está ativa' unless account.active?
 
           errors
         end
