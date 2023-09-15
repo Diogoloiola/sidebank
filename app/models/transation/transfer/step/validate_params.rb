@@ -19,11 +19,13 @@ module Transation
           account_origin = Account::Record.find(origin_id)
           account_destiny = Account::Record.find(destiny_id)
 
+          errors << 'O valor não poder ser negativo' if value.negative?
+
           if (account_origin.balance - value).negative?
             errors << 'A conta de origin não tem saldo suficiente para realizar a transferência'
           end
 
-          errors << 'A conta de origin está desativada' unless account_origin.active?
+          errors << 'A conta de origem está desativada' unless account_origin.active?
 
           errors << 'A conta de destino está desativada' unless account_destiny.active?
 
