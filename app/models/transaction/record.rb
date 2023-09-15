@@ -1,11 +1,11 @@
-module Transation
+module Transaction
   class Record < ApplicationRecord
-    self.table_name = 'transations'
+    self.table_name = 'transactions'
 
     belongs_to :origin, class_name: 'Account::Record', optional: false
     belongs_to :destiny, class_name: 'Account::Record', optional: true
 
-    enum transation_type: {
+    enum transaction_type: {
       deposito: 0,
       saque: 1,
       transferencia: 2

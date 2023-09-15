@@ -1,5 +1,5 @@
-module Transation
-  module Deposit
+module Transaction
+  module Withdrawal
     module Step
       class ValidateParams < Micro::Case::Strict
         attributes :origin_id, :value
@@ -21,6 +21,7 @@ module Transation
 
           errors << 'O valor não poder ser negativo' if value.negative?
           errors << 'A conta não está ativa' unless account.active?
+          errors << 'A conta não possui saldo para esse saque' if (account.balance - value).negative?
 
           errors
         end

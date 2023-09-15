@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Transation::Transfer::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
+RSpec.describe Transaction::Transfer::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
   let(:account_origin) { create(:account_accounts) }
   let(:account_destiny) { create(:account_accounts) }
 
@@ -79,7 +79,7 @@ RSpec.describe Transation::Transfer::Flow, type: :user_case do # rubocop:disable
           result = described_class.call(attributes)
 
           expect(result.success?).to be true
-          expect(result.data[:transation]).to be_an(Transation::Record)
+          expect(result.data[:transaction]).to be_an(Transaction::Record)
         end
 
         it 'O valor deve ser descontado na conta de origem de adicionado na conta de destino' do

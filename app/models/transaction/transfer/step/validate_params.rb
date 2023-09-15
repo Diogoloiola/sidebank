@@ -1,4 +1,4 @@
-module Transation
+module Transaction
   module Transfer
     module Step
       class ValidateParams < Micro::Case::Strict

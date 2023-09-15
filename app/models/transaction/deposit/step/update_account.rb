@@ -1,13 +1,13 @@
-module Transation
-  module Withdrawal
+module Transaction
+  module Deposit
     module Step
       class UpdateAccount < Micro::Case::Strict
-        attributes :transation
+        attributes :transaction
 
         def call! # rubocop:disable Metrics/MethodLength
-          account = transation.origin
-          if account.update(balance: account.balance - transation.value)
-            Success result: { transation: }
+          account = transaction.origin
+          if account.update(balance: account.balance + transaction.value)
+            Success result: { transaction: }
           else
             Failure :error, result: {
               errors: account.errors.full_messages.join(', ')

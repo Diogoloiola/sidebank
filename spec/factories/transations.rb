@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :transation do
+  factory :transaction do
     type_transaction { 1 }
     value { '9.99' }
   end

@@ -1,7 +1,7 @@
-class CreateTransations < ActiveRecord::Migration[7.0]
+class CreateTransactions < ActiveRecord::Migration[7.0]
   def change
-    create_table :transations, id: :uuid do |t|
-      t.integer :transation_type
+    create_table :transactions, id: :uuid do |t|
+      t.integer :transaction_type
       t.decimal :value
       t.datetime :hour
       t.references :origin, null: false, foreign_key: { to_table: :account_accounts }, type: :uuid

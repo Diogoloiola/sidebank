@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Transation::Deposit::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
+RSpec.describe Transaction::Deposit::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
   let(:account) { create(:account_accounts) }
   let(:invalid_account) { create(:account_accounts, active: false) }
 
@@ -56,7 +56,7 @@ RSpec.describe Transation::Deposit::Flow, type: :user_case do # rubocop:disable 
           result = described_class.call(attributes)
 
           expect(result.success?).to be true
-          expect(result.data[:transation]).to be_an(Transation::Record)
+          expect(result.data[:transaction]).to be_an(Transaction::Record)
         end
 
         it 'o saldo da conta deve ter sido alterado' do
