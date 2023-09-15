@@ -1,13 +1,13 @@
 module Transation
-  module Deposit
+  module Withdrawal
     module Step
-      class Persit < Micro::Case::Strict
+      class Persist < Micro::Case::Strict
         attributes :origin_id, :value
 
         def call! # rubocop:disable Metrics/MethodLength
           transation = Transation::Record.new(
             origin_id:,
-            transation_type: :deposito,
+            transation_type: :saque,
             value:,
             hour: Time.zone.now.to_datetime
           )

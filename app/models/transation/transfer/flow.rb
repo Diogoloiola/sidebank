@@ -5,7 +5,7 @@ module Transation
 
       def call!
         call(Transation::Transfer::Step::ValidateParams)
-          .then(Transation::Transfer::Step::Persit)
+          .then(Transation::Transfer::Step::Persist)
           .then(Transation::Transfer::Step::WithdrawalOrigin)
           .then(Transation::Transfer::Step::DepositDestiny)
       end

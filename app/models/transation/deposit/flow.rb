@@ -5,7 +5,7 @@ module Transation
 
       def call!
         call(Step::ValidateParams)
-          .then(Transation::Deposit::Step::Persit)
+          .then(Transation::Deposit::Step::Persist)
           .then(Transation::Deposit::Step::UpdateAccount)
       end
     end

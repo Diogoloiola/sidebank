@@ -1,7 +1,7 @@
 module Transation
   module Transfer
     module Step
-      class Persit < Micro::Case::Strict
+      class Persist < Micro::Case::Strict
         attributes :origin_id, :destiny_id, :value
 
         def call! # rubocop:disable Metrics/MethodLength
