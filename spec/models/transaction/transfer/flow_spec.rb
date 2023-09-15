@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Transaction::Transfer::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
+RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # rubocop:disable Metrics/BlockLength
   let(:account_origin) { create(:account_accounts) }
   let(:account_destiny) { create(:account_accounts) }
 
