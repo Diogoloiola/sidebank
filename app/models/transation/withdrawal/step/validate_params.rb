@@ -5,17 +5,25 @@ module Transation
         attributes :origin_id, :value
 
         def call!
-          return Success(result: attributes) if permit_withdrawal?
+          errors = validate_params
 
-          Failure(:invalid_attributes, result: { errors: ['Erro: Não é possivél fazer o saque'] })
+          return Success(result: attributes) if errors.empty?
+
+          Failure(:invalid_attributes, result: { errors: })
         end
 
         private
 
-        def permit_withdrawal?
+        def validate_params
+          errors = []
+
           account = Account::Record.find(origin_id)
 
-          (account.balance - value).positive?
+          errors << 'O valor não poder ser negativo' if value.negative?
+          errors << 'A conta não está ativa' unless account.active?
+          errors << 'A conta não possui saldo para esse saque' if (account.balance - value).negative?
+
+          errors
         end
       end
     end
