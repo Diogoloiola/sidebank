@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Agency::Register::Create, type: :user_case do # rubocop:disable Metrics/BlockLength
   let(:attributes) do
     {
-      name: Faker::Bank.name
+      name: Faker::Bank.name.slice(0, 28)
     }
   end
 
