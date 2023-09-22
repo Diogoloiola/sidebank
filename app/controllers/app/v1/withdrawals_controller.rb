@@ -5,7 +5,7 @@ module App
       before_action :set_withdrawal, only: %i[show]
 
       def index
-        @pagy, @withdrawals = pagy(Transaction::Record.where(origin_id: params[:account_id], transaction_type: :saque),
+        @pagy, @withdrawals = pagy(Transaction::Record.filter(permitted_params),
                                    page: params[:page], items: params[:per_page])
       end
 
@@ -30,6 +30,10 @@ module App
 
       def set_user
         @user = current_customer_record
+      end
+
+      def permitted_params
+        params.permit(:origin_id).merge(transaction_type: :saque)
       end
 
       def withdrawals_params
