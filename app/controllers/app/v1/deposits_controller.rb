@@ -5,7 +5,8 @@ module App
       before_action :set_deposit, only: %i[show]
 
       def index
-        @deposits = Account::Record.find_by(customer: @user, id: params[:account_id]).deposits
+        @pagy, @deposits = pagy(Transaction::Record.where(origin_id: params[:account_id], transaction_type: :deposito),
+                                page: params[:page], items: params[:per_page])
       end
 
       def show; end
@@ -17,7 +18,7 @@ module App
           @deposit = result.data[:transaction]
           render :show, status: :created
         else
-          render json: result.data[:errors], status: :unprocessable_entity
+          render json: { errors: result.data[:errors] }, status: :unprocessable_entity
         end
       end
 
