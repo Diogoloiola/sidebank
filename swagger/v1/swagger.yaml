@@ -5,55 +5,15 @@ info:
   version: v1
 paths:
   "/app/v1/withdrawals":
-    post:
-      summary: Realiza um saque de um usuário
+    get:
+      summary: Lista todos os saques
       tags:
-      - Withdrawal
-      parameters: []
+      - Usuários
+      security:
+      - api_key: []
       responses:
-        '201':
-          description: Cria um saque
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  withdrawal:
-                    properties:
-                      account_origin_id:
-                        type: string
-                      transaction_type:
-                        type: string
-                      value:
-                        type: string
-                      hour:
-                        type: string
-        '422':
-          description: requsição inválida
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                withdrawal:
-                  properties:
-                    account_origin_id:
-                      type: string
-                    value:
-                      type: number
-              required:
-              - account_origin_id
-              - value
+        '200':
+          description: Com usuário logado
   "/web/v1/customers":
     post:
       summary: cria um novo customer
@@ -124,3 +84,9 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

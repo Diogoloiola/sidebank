@@ -1,61 +1,19 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
-RSpec.describe '/app/v1/withdrawals', type: :request do # rubocop:disable Metrics/BlockLength
-  describe 'Open API' do # rubocop:disable Metrics/BlockLength
-    path '/app/v1/withdrawals' do
-      post 'Realiza um saque de um usuário' do
-        tags 'Withdrawal'
-        consumes 'application/json'
-        parameter name: :withdrawal, in: :body, schema: {
-          type: :object,
-          properties: {
-            withdrawal: {
-              properties: {
-                origin_id: { type: :string },
-                value: { type: :number }
-              }
-            }
-          },
-          required: %w[origin_id value]
-        }
+describe 'Usuários' do
+  path '/app/v1/withdrawals' do
+    get 'Lista todos os saques' do
+      tags 'Usuários'
+      consumes 'application/json'
+      security [api_key: []]
 
-        response '201', 'Cria um saque' do
-          produces 'application/json'
-          let(:account) { create(:account_accounts, balance: 100) }
+      response '200', 'Lista todos os depósitos' do
+        let(:user) { create(:customer_customer) }
+        let(:Authorization) { user.create_new_auth_token['Authorization'] }
 
-          let(:attributes) do
-            {
-              origin_id: account.id,
-              value: 100
-            }
-          end
-
-          schema type: :object, properties: { withdrawal: {
-            properties: {
-              origin_id: { type: :string },
-              transaction_type: { type: :string },
-              value: { type: :string },
-              hour: { type: :string }
-
-            }
-          } }
-          run_test!
-        end
-
-        response '422', 'requsição inválida' do
-          produces 'application/json'
-          let(:account) { create(:account_accounts) }
-
-          schema type: :object, properties: {
-            errors: {
-              type: :array,
-              items: {
-                type: :string
-              }
-            }
-          }
-          run_test!
-        end
+        run_test!
       end
     end
   end
