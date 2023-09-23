@@ -1,7 +1,7 @@
 module Transaction
   module Deposit
     class Flow < Micro::Case::Strict
-      attributes :origin_id, :value
+      attributes :account_origin_id, :value
 
       def call!
         call(Step::ValidateParams)

@@ -2,7 +2,7 @@ module Transaction
   module Deposit
     module Step
       class ValidateParams < Micro::Case::Strict
-        attributes :origin_id, :value
+        attributes :account_origin_id, :value
 
         def call!
           errors = validate_params
@@ -17,7 +17,7 @@ module Transaction
         def validate_params
           errors = []
 
-          account = Account::Record.find(origin_id)
+          account = Account::Record.find(account_origin_id)
 
           errors << 'O valor não poder ser negativo' if value.negative?
           errors << 'A conta não está ativa' unless account.active?

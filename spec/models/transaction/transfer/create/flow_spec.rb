@@ -8,8 +8,8 @@ RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # ruboco
 
   let(:attributes) do
     {
-      origin_id: account_origin.id,
-      destiny_id: account_destiny.id,
+      account_origin_id: account_origin.id,
+      account_destiny_id: account_destiny.id,
       value: 100
     }
   end
@@ -36,7 +36,7 @@ RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # ruboco
 
       context 'Quando a conta de origem está desativada' do
         it 'retorna uma falha' do
-          attributes[:origin_id] = invalid_account.id
+          attributes[:account_origin_id] = invalid_account.id
 
           result = described_class.call(attributes)
 
@@ -46,7 +46,7 @@ RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # ruboco
         end
 
         it 'expor a mensagem de erro' do
-          attributes[:origin_id] = invalid_account.id
+          attributes[:account_origin_id] = invalid_account.id
 
           result = described_class.call(attributes)
           expect(result[:errors]).to include('A conta de origem está desativada')
@@ -55,7 +55,7 @@ RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # ruboco
 
       context 'Quando a conta de destino está desativada' do
         it 'retorna uma falha' do
-          attributes[:destiny_id] = invalid_account.id
+          attributes[:account_destiny_id] = invalid_account.id
 
           result = described_class.call(attributes)
 
@@ -65,7 +65,7 @@ RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # ruboco
         end
 
         it 'expor a mensagem de erro' do
-          attributes[:destiny_id] = invalid_account.id
+          attributes[:account_destiny_id] = invalid_account.id
 
           result = described_class.call(attributes)
           expect(result[:errors]).to include('A conta de destino está desativada')
@@ -86,7 +86,9 @@ RSpec.describe Transaction::Transfer::Create::Flow, type: :user_case do # ruboco
           previous_balance_origin = account_origin.balance
           previous_balance_destiny = account_destiny.balance
 
-          described_class.call(attributes)
+          result = described_class.call(attributes)
+
+          expect(result.success?).to be true
 
           account_origin.reload
           account_destiny.reload

@@ -1,7 +1,7 @@
 module Transaction
   module Withdrawal
     class Flow < Micro::Case::Strict
-      attributes :origin_id, :value
+      attributes :account_origin_id, :value
 
       def call!
         call(Transaction::Withdrawal::Step::ValidateParams)

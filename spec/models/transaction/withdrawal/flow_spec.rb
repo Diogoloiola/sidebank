@@ -6,7 +6,7 @@ RSpec.describe Transaction::Withdrawal::Flow, type: :user_case do # rubocop:disa
 
   let(:attributes) do
     {
-      origin_id: account.id,
+      account_origin_id: account.id,
       value: 100
     }
   end
@@ -33,7 +33,7 @@ RSpec.describe Transaction::Withdrawal::Flow, type: :user_case do # rubocop:disa
 
       context 'Quando a conta do depósito está desativada' do
         it 'retorna uma falha' do
-          attributes[:origin_id] = invalid_account.id
+          attributes[:account_origin_id] = invalid_account.id
 
           result = described_class.call(attributes)
 
@@ -43,7 +43,7 @@ RSpec.describe Transaction::Withdrawal::Flow, type: :user_case do # rubocop:disa
         end
 
         it 'expor a mensagem de erro' do
-          attributes[:origin_id] = invalid_account.id
+          attributes[:account_origin_id] = invalid_account.id
           result = described_class.call(attributes)
           expect(result[:errors]).to include('A conta não está ativa')
         end

@@ -33,13 +33,13 @@ module App
       end
 
       def permitted_params
-        params.permit(:origin_id).merge(transaction_type: :saque)
+        params.permit(:account_origin_id).merge(transaction_type: :saque)
       end
 
       def withdrawals_params
         return {} unless params.key?(:withdrawal)
 
-        params.require(:withdrawal).permit(:value, :origin_id)
+        params.require(:withdrawal).permit(:value, :account_origin_id)
       end
     end
   end

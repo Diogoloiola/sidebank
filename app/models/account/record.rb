@@ -7,13 +7,13 @@ module Account
 
     has_many :deposits, lambda {
                           where(transaction_type: :deposito)
-                        }, class_name: 'Transaction::Record', foreign_key: :origin_id
+                        }, class_name: 'Transaction::Record', foreign_key: :account_origin_id
     has_many :withdrawals, lambda {
                              where(transaction_type: :saque)
-                           }, class_name: 'Transaction::Record', foreign_key: :origin_id
+                           }, class_name: 'Transaction::Record', foreign_key: :account_origin_id
     has_many :transfers, lambda {
                            where.not(transaction_type: %i[deposito saque])
-                         }, class_name: 'Transaction::Record', foreign_key: :origin_id
+                         }, class_name: 'Transaction::Record', foreign_key: :account_origin_id
 
     validates :code, :account_type, :opening_date, presence: true
     validates :code, uniqueness: true

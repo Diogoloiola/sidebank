@@ -3,12 +3,12 @@ module Transaction
     module Create
       module Step
         class Persist < Micro::Case::Strict
-          attributes :origin_id, :destiny_id, :value
+          attributes :account_origin_id, :account_destiny_id, :value
 
           def call! # rubocop:disable Metrics/MethodLength
             transaction = Transaction::Record.new(
-              origin_id:,
-              destiny_id:,
+              account_origin_id:,
+              account_destiny_id:,
               transaction_type: :transferencia,
               value:,
               hour: Time.zone.now.to_datetime

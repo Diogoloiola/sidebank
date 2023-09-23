@@ -6,7 +6,7 @@ RSpec.describe Transaction::Deposit::Flow, type: :user_case do # rubocop:disable
 
   let(:attributes) do
     {
-      origin_id: account.id,
+      account_origin_id: account.id,
       value: 100
     }
   end
@@ -33,7 +33,7 @@ RSpec.describe Transaction::Deposit::Flow, type: :user_case do # rubocop:disable
 
       context 'Quando a conta do depósito está desativada' do
         it 'retorna uma falha' do
-          attributes[:origin_id] = invalid_account.id
+          attributes[:account_origin_id] = invalid_account.id
 
           result = described_class.call(attributes)
 
@@ -43,7 +43,7 @@ RSpec.describe Transaction::Deposit::Flow, type: :user_case do # rubocop:disable
         end
 
         it 'expor a mensagem de erro' do
-          attributes[:origin_id] = invalid_account.id
+          attributes[:account_origin_id] = invalid_account.id
           result = described_class.call(attributes)
           expect(result[:errors]).to include('A conta não está ativa')
         end
@@ -54,7 +54,6 @@ RSpec.describe Transaction::Deposit::Flow, type: :user_case do # rubocop:disable
       context 'Quando todos os dados estão corretos' do
         it 'deve retorna um objeto do tipo Transfer::Record' do
           result = described_class.call(attributes)
-
           expect(result.success?).to be true
           expect(result.data[:transaction]).to be_an(Transaction::Record)
         end

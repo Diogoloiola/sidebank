@@ -11,8 +11,8 @@ module Transaction
 
           return Failure(:invalid_attributes, result: { errors: }) if errors.any?
 
-          account_origin = transaction.origin
-          account_destiny = transaction.destiny
+          account_origin = transaction.account_origin
+          account_destiny = transaction.account_destiny
 
           account_origin.update(balance: account_origin.balance + transaction.value)
           account_destiny.update(balance: account_destiny.balance - transaction.value)

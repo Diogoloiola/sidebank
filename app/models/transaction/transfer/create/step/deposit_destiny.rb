@@ -6,7 +6,7 @@ module Transaction
           attributes :transaction
 
           def call! # rubocop:disable Metrics/MethodLength
-            account = transaction.destiny
+            account = transaction.account_destiny
             if account.update(balance: account.balance + transaction.value)
               Success result: { transaction: }
             else

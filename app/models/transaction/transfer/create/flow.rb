@@ -2,7 +2,7 @@ module Transaction
   module Transfer
     module Create
       class Flow < Micro::Case::Strict
-        attributes :origin_id, :destiny_id, :value
+        attributes :account_origin_id, :account_destiny_id, :value
 
         def call!
           call(Transaction::Transfer::Create::Step::ValidateParams)

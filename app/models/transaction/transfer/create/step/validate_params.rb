@@ -3,7 +3,7 @@ module Transaction
     module Create
       module Step
         class ValidateParams < Micro::Case::Strict
-          attributes :origin_id, :destiny_id, :value
+          attributes :account_origin_id, :account_destiny_id, :value
 
           def call!
             errors = validate_params
@@ -17,8 +17,8 @@ module Transaction
 
           def validate_params
             errors = []
-            account_origin = Account::Record.find(origin_id)
-            account_destiny = Account::Record.find(destiny_id)
+            account_origin = Account::Record.find(account_origin_id)
+            account_destiny = Account::Record.find(account_destiny_id)
 
             errors << 'O valor não poder ser negativo' if value.negative?
 

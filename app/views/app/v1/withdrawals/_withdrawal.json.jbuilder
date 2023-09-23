@@ -1,1 +1,1 @@
-json.extract! withdrawal, :id, :transaction_type, :origin_id, :value, :hour
+json.extract! withdrawal, :id, :transaction_type, :account_origin_id, :value, :hour

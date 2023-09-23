@@ -4,8 +4,8 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
       t.integer :transaction_type
       t.decimal :value
       t.datetime :hour
-      t.references :origin, null: false, foreign_key: { to_table: :account_accounts }, type: :uuid
-      t.references :destiny, null: true, foreign_key: { to_table: :account_accounts }, type: :uuid
+      t.references :account_origin, null: false, foreign_key: { to_table: :account_accounts }, type: :uuid
+      t.references :account_destiny, null: true, foreign_key: { to_table: :account_accounts }, type: :uuid
 
       t.timestamps
     end

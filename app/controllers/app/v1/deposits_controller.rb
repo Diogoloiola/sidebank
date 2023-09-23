@@ -33,13 +33,13 @@ module App
       end
 
       def permitted_params
-        params.permit(:origin_id).merge(transaction_type: :deposito)
+        params.permit(:account_origin_id).merge(transaction_type: :deposito)
       end
 
       def deposit_params
         return {} unless params.key?(:deposit)
 
-        params.require(:deposit).permit(:value, :origin_id)
+        params.require(:deposit).permit(:value, :account_origin_id)
       end
     end
   end

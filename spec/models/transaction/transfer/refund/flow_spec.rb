@@ -6,8 +6,8 @@ RSpec.describe Transaction::Transfer::Refund::Flow, type: :user_case do # ruboco
 
   let(:attributes) do
     {
-      origin_id: account_origin.id,
-      destiny_id: account_destiny.id,
+      account_origin_id: account_origin.id,
+      account_destiny_id: account_destiny.id,
       value: 10
     }
   end
@@ -47,13 +47,15 @@ RSpec.describe Transaction::Transfer::Refund::Flow, type: :user_case do # ruboco
 
           transaction = Transaction::Transfer::Create::Flow.call(attributes).data[:transaction]
 
-          described_class.call(transaction_id: transaction.id)
+          result = described_class.call(transaction_id: transaction.id)
+
+          expect(result.success?).to be true
 
           account_origin.reload
           account_destiny.reload
 
-          expect(account_origin.balance).to eq(previous_balance_origin)
-          expect(account_destiny.balance).to eq(previous_balance_destiny)
+          expect(account_origin.balance.to_f).to eq(previous_balance_origin.to_f)
+          expect(account_destiny.balance.to_f).to eq(previous_balance_destiny.to_f)
         end
       end
     end

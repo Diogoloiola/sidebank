@@ -20,7 +20,7 @@ paths:
                 properties:
                   withdrawal:
                     properties:
-                      origin_id:
+                      account_origin_id:
                         type: string
                       transaction_type:
                         type: string
@@ -47,12 +47,12 @@ paths:
               properties:
                 withdrawal:
                   properties:
-                    origin_id:
+                    account_origin_id:
                       type: string
                     value:
                       type: number
               required:
-              - origin_id
+              - account_origin_id
               - value
   "/web/v1/customers":
     post:
