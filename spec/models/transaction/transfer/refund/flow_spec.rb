@@ -16,11 +16,13 @@ RSpec.describe Transaction::Transfer::Refund::Flow, type: :user_case do # ruboco
     describe 'falhas' do
       context 'Quando uma transferência já foi revertida' do
         it 'retorna uma falha' do
-          transaction = Transaction::Transfer::Create::Flow.call(attributes).data[:transaction]
+          transaction = Transaction::Transfer::Create::Flow.call(attributes)
 
-          transaction.update(reverted: true)
+          expect(transaction.success?).to be true
 
-          result = described_class.call(transaction_id: transaction.id)
+          transaction[:transaction].update(reverted: true)
+
+          result = described_class.call(transaction_id: transaction[:transaction].id)
 
           expect(result).to be_a_failure
           expect(result.type).to be(:invalid_attributes)
@@ -45,9 +47,11 @@ RSpec.describe Transaction::Transfer::Refund::Flow, type: :user_case do # ruboco
           previous_balance_origin = account_origin.balance
           previous_balance_destiny = account_destiny.balance
 
-          transaction = Transaction::Transfer::Create::Flow.call(attributes).data[:transaction]
+          transaction = Transaction::Transfer::Create::Flow.call(attributes)
 
-          result = described_class.call(transaction_id: transaction.id)
+          expect(transaction.success?).to be true
+
+          result = described_class.call(transaction_id: transaction[:transaction].id)
 
           expect(result.success?).to be true
 
